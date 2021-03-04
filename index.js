@@ -25,6 +25,23 @@ const filterData = ({categories, audits}) => ({
   'first-cpu-idle': audits['first-cpu-idle'],
 })
 
+const isDiffNegative = (metricName, value) => {
+  const config = {
+    'performance-score': 1,
+    'first-contentful-paint': -1,
+    'largest-contentful-paint': -1,
+    'first-meaningful-paint': -1,
+    'speed-index': -1,
+    'total-blocking-time': -1,
+    'max-potential-fid': -1,
+    'cumulative-layout-shift': -1,
+    'server-response-time': -1,
+    'first-cpu-idle': -1,
+  }
+
+  return config[metricName] * value < 0;
+}
+
 const getDisplayName = (metricName) => {
   switch(metricName) {
     case 'performance-score': return 'Performance ········'
@@ -116,10 +133,10 @@ Object.keys(diffData).forEach((metricName) => {
   const metricValue = diffData[metricName];
   
   
-  if (metricValue < 0) {
+  if (isDiffNegative(metricName, metricValue)) {
     console.log("\x1b[37m", `${getDisplayName(metricName)}`, "\x1b[31m", `${metricValue}${displayUnit}`)
   } else {
-    console.log("\x1b[37m", `${getDisplayName(metricName)}`, "\x1b[32m", `+${metricValue}${displayUnit}`)
+    console.log("\x1b[37m", `${getDisplayName(metricName)}`, "\x1b[32m", `${metricValue}${displayUnit}`)
   }
 })
 console.log('\n')
