@@ -1,0 +1,15 @@
+{
+  "name": "compare",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/alexanderyarm/lighthouse-report-diff.git",
+  "author": "Alexander Yarmosh <alexander.yarmosh@omio.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lighthouse": "7.2.0"
+  },
+  "scripts": {
+    "report": "node collect-reports.js",
+    "compare": "node compare.js"
+  }
+}

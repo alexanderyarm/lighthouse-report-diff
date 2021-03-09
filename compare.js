@@ -1,8 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const beforeFolder = path.resolve(__dirname, 'before')
-const afterFolder = path.resolve(__dirname, 'after')
+const args = process.argv.slice(2);
+
+const beforeFolder = path.resolve(__dirname, args[0] || 'before')
+const afterFolder = path.resolve(__dirname, args[1] || 'after')
 
 const beforeFiles = fs.readdirSync(beforeFolder).filter(filename => filename !== '.DS_Store')
 const afterFiles = fs.readdirSync(afterFolder).filter(filename => filename !== '.DS_Store')
