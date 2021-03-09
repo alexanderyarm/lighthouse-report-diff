@@ -33,6 +33,7 @@ for (let i = 0; i < NUMBER_OF_RUNS; i++) {
   const {status = -1, stdout} = spawnSync('node', [
     lighthouseCli,
     testUrl,
+    '--only-categories=performance',
     '--output=json'
   ]);
   if (status !== 0) {
@@ -42,5 +43,3 @@ for (let i = 0; i < NUMBER_OF_RUNS; i++) {
 
   saveFile(path.resolve(outputFolderPath, `run-${i + 1}.json`), JSON.stringify(JSON.parse(stdout)));
 }
-
-console.log('Median performance score was', median.categories.performance.score * 100);
